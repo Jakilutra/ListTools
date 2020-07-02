@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>
+				List reorderer
+			</title>
+			<style>
+				body {
+					background: radial-gradient(circle, rgba(244,202,46,1) 33%, rgba(240,168,31,1) 66%, rgba(252,131,7,0.9971698151917017) 100%);
+					text-align: center;
+					font-family: georgia;
+				}
+				a:link {
+					color: #0000EE;
+				}
+				a:visited {
+					color: #0000EE;
+				}
+				h1 {
+					text-decoration: underline;
+				}
+				h4 {
+					line-height: 0;
+					margin-top: 10px;
+					margin-bottom: 10px;
+					text-align: center;
+					font-size: 12px;
+				}
+				label {
+					font-weight: bold;
+				}
+				button {
+					margin-top: 10px;
+					margin-left: 20px;
+					font-weight: bold;
+					width: 400px;
+				}
+				.no-fouc {
+					display: none;
+				}
+				.div-inline {
+					display:inline-block;
+					margin-top: 10px;
+				}
+				.tarea {
+					resize: none;
+					border : 2px solid black;
+					width: 380px;
+					height: 70px;
+					margin-left: 10px;
+					margin-right: 10px;
+					margin-top: 2px;
+					text-align: center;
+					padding: 5px;
+					font-size: 12px;
+				}
+				.small {
+					font-size: 12px;
+				}
+				#round {
+					width: 50px;
+				}
+				#output {
+					border: 3px solid black;
+					width: 780px;
+					height: 130px;
+				}
+				#empty {
+					width: 60px;
+					padding: 0px;
+					margin-left: 10px;
+					font-size: 11px;
+				}
+			</style>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<script src="https://jakilutra.github.io/ListTools/list_reorderer.js"></script>
+		</head>
+		<body>
+			<h1> List Reorderer</h1>
+			<div><a href="https://jakilutra.github.io/ListTools/" id="home">Home</a> | <b>List Reorderer</b></div>
+			<div class="div-inline">
+				<h4 id="W1"><b><small>Left/Top</small> Winner Bracket R1 <small>Winners</small> Pairings [0/8]</b></h4>
+				<textarea oninput="tidy(this.name, this.value);" name= "top-left" id="top-left" class="tarea" cols="50" placeholder="Copy and paste text from the bracketmaker directly. 'vs' uses 2 spaces on each side in order to disambiguate names."></textarea>
+			</div>
+			<div class="div-inline">
+				<h4 id="W2"><b><small>Right/Bottom</small> Winner Bracket R1 <small>Winners</small> Pairings [0/8]</b></h4>
+				<textarea oninput="tidy(this.name, this.value);" name= "top-right" id="top-right" class="tarea" cols="50" placeholder="Copy and paste text from the bracketmaker directly. 'vs' uses 2 spaces on each side in order to disambiguate names."></textarea>
+			</div>
+			<br/>
+			<div class="div-inline">
+				<h4 id="L1"><b><small>Left/Top</small> Loser Bracket R1 <small>Winners</small> Pairings [0/8]</b></h4>
+				<textarea oninput="tidy(this.name, this.value);" name= "bottom-left" id="bottom-left" class="tarea" cols="50" placeholder="Copy and paste text from the bracketmaker directly. 'vs' uses 2 spaces on each side in order to disambiguate names."></textarea>
+			</div>
+			<div class="div-inline">
+				<h4 id="L2"><b><small>Right/Bottom</small> Loser Bracket R1 <small>Winners</small> Pairings [0/8]</b></h4>
+				<textarea oninput="tidy(this.name, this.value);" name= "bottom-right" id="bottom-right" class="tarea" cols="50" placeholder="Copy and paste text from the bracketmaker directly. 'vs' uses 2 spaces on each side in order to disambiguate names."></textarea>
+			</div>
+			<br/>
+			<div class='div-inline'>
+				<label>Theme</label>
+				<select id="themechange" onchange="changeTheme(this.value);">
+					<option value="DeepDark">Deep Dark</option>
+					<option value="IceBlue">Ice Blue</option>
+					<option value="MalachtiteGreen">Malachtite Green</option>
+					<option value="PhloxPurple">Phlox Purple</option>
+					<option value="ScarletRed">Scarlet Red</option>
+					<option value="StandardSilver">Standard Silver</option>
+					<option value="SunnyOrange" selected>Sunny Orange</option>
+				</select>
+				<label class="small"><b>Size</b></label>
+				<select id="scaler" class="small" onchange="scale(this.value);">
+					<option value="1" selected>1.0 ×</option>
+					<option value="1.5">1.5 ×</option>
+				</select>
+				<select id="size" class="small" onchange="modifySize(this.value, false);">
+					<option id="8" value="8">8</option>
+					<option id="16" value="16">16</option>
+					<option id="32" value="32">32</option>
+					<option id="64" value="64" selected>64</option>
+					<option id="128" value="128">128</option>
+					<option id="256" value="256">256</option>
+					<option id="512" value="512">512</option>
+				</select>
+				<label class="small"><b>Round</b></label>
+				<select id="parity" class="small" onchange="changeParity(this.value);">
+					<option value="even" selected>Even</option>
+					<option value="odd">Odd</option>
+				</select>
+				<select id="round" class="small" onchange="updateRound(this.value);">
+					<option id="2" value="2" selected>2</option>
+					<option id="4" value="4">4</option>
+					<option id="6" value="6">6</option>
+					<option id="1000" value="8">8</option>
+				</select>
+				<label class="small"><b>Method</b></label>
+				<select id="method" class="small" onchange="updateMethod(this.value);">
+					<option value="Stack">Stack [A1 vs B1] (original) </option>
+					<option value="Odd-even" selected>Odd-even [A1 vs B2] (safer)</option>
+				</select>
+			</div>
+			<br/>
+			<input type="checkbox" id="@on" value="@on" onchange="atUpdate();" checked>
+			<label for="@on" class="small">@ On/Off</label>
+			<button id="button" type="button" onclick="output();">Construct Pairings [0/32]</button>
+			<input type="checkbox" id="reverse" value="reverse" onchange="reversal()">
+			<label for="reverse" class="small">Reverse</label>
+			<button id="empty" type="button" onclick="empty();">🗑 Empty</button>
+			<div>
+				<textarea onkeyup="tidy(this.name, this.value);" name= "output" class="tarea" id="output" cols="100" placeholder="Merged output will be displayed here." readonly></textarea>
+			</div>
+		</body>	
+	</html>
