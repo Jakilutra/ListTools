@@ -89,48 +89,25 @@
 					<option value="DeepDark">Deep Dark</option>
 					<option value="IceBlue">Ice Blue</option>
 					<option value="MalachtiteGreen">Malachtite Green</option>
-					<option value="PhloxPurple">Phlox Purple</option>
+					<option value="PhloxPurple" selected>Phlox Purple</option>
 					<option value="ScarletRed">Scarlet Red</option>
 					<option value="StandardSilver">Standard Silver</option>
-					<option value="SunnyOrange" selected>Sunny Orange</option>
+					<option value="SunnyOrange">Sunny Orange</option>
 				</select>
-				<label class="small"><b>Size</b></label>
-				<select id="scaler" class="small" onchange="scale(this.value);">
-					<option value="1" selected>1.0 ×</option>
-					<option value="1.5">1.5 ×</option>
+				<label class="small"><b>Reorder Type</b></label>
+				<select id="reorder" class="small" onchange="">
+					<option id="abc" value="abc" selected>Alphabetical</option>
+					<option id="reverse" value="reverse">Reverse</option>
 				</select>
-				<select id="size" class="small" onchange="modifySize(this.value, false);">
-					<option id="8" value="8">8</option>
-					<option id="16" value="16">16</option>
-					<option id="32" value="32">32</option>
-					<option id="64" value="64" selected>64</option>
-					<option id="128" value="128">128</option>
-					<option id="256" value="256">256</option>
-					<option id="512" value="512">512</option>
-				</select>
-				<label class="small"><b>Round</b></label>
-				<select id="parity" class="small" onchange="changeParity(this.value);">
-					<option value="even" selected>Even</option>
-					<option value="odd">Odd</option>
-				</select>
-				<select id="round" class="small" onchange="updateRound(this.value);">
-					<option id="2" value="2" selected>2</option>
-					<option id="4" value="4">4</option>
-					<option id="6" value="6">6</option>
-					<option id="1000" value="8">8</option>
-				</select>
-				<label class="small"><b>Method</b></label>
-				<select id="method" class="small" onchange="updateMethod(this.value);">
-					<option value="Stack">Stack [A1 vs B1] (original) </option>
-					<option value="Odd-even" selected>Odd-even [A1 vs B2] (safer)</option>
+				<label class="small"><b>Separated by</b></label>
+				<select id="delimiter" class="small" onchange="">
+					<option value="commaspace" selected>, </option>
+					<option value="newline">newline (list in a column)</option>
 				</select>
 			</div>
 			<br/>
-			<input type="checkbox" id="@on" value="@on" onchange="atUpdate();" checked>
-			<label for="@on" class="small">@ On/Off</label>
+			<button id="empty" type="button" onclick="empty();">Example</button>
 			<button id="button" type="button" onclick="output();">Construct Pairings [0/32]</button>
-			<input type="checkbox" id="reverse" value="reverse" onchange="reversal()">
-			<label for="reverse" class="small">Reverse</label>
 			<button id="empty" type="button" onclick="empty();">🗑 Empty</button>
 			<div>
 				<textarea onkeyup="tidy(this.name, this.value);" name= "output" class="tarea" id="output" cols="100" placeholder="Merged output will be displayed here." readonly></textarea>
