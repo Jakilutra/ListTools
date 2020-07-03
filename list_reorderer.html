@@ -65,6 +65,12 @@
 					width: 780px;
 					height: 130px;
 				}
+				#atswap {
+					width: 40px;
+					padding: 0px;
+					margin-left: 10px;
+					font-size: 11px;
+				}
 				#example {
 					width: 80px;
 					padding: 0px;
@@ -125,8 +131,7 @@
 				</select>
 			</div>
 			<br/>
-			<input type="checkbox" id="@in" value="@in" onchange="" checked>
-			<label for="@in" class="small">@ In/Out</label>
+			<button id="atswap" type="button" onclick="atswap();">⇄@</button>
 			<button id="example" type="button" onclick="example();">💼 Example</button>
 			<button id="button" type="button" onclick="output();">Reorder [0 elements]</button>
 			<button id="empty" type="button" onclick="empty();">🗑 Empty</button>
