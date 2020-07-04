@@ -15,7 +15,7 @@ function startUp () {
 	
 	// Setting stored defaults.
 	
-	if (theme === "DeepDark" || theme === "IceBlue" || theme === "MalachtiteGreen" || theme === "PhloxPurple" || theme === "ScarletRed" || theme === "StandardSilver") {
+	if (theme === "DeepDark" || theme === "IceBlue" || theme === "MalachtiteGreen" || theme === "ScarletRed" || theme === "StandardSilver" || theme === "SunnyOrange") {
 		document.getElementById("themechange").value = theme;
 		changeTheme(theme);
 	}
