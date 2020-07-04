@@ -74,5 +74,6 @@ function tidy (name, text) {
 	localStorage.setItem(name, newtext);
 }
 function empty () {
+	tidy("", "");
 	tidy("outputlist", "");
 }
