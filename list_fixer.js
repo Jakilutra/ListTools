@@ -7,10 +7,12 @@ var buttonclicked = false;
 function startUp () {
 	// Declaring variables.
 	var theme = "",
-	    outputlist = "",
+	    inputlist = "",
+	    outputlist = "";
 	
 	// Assigning stored variables
 	theme = localStorage.getItem("theme");
+	inputlist = localStorage.getItem("inputlist");
 	outputlist = localStorage.getItem("outputlist");
 	
 	// Setting stored defaults.
@@ -66,6 +68,7 @@ function changeTheme(selected) {
 function tidy (name, text) {
 	newtext = "";
 	newtext = text;
+	document.getElementById(name).value = newtext;
 	if (text === "") {
 		localStorage.removeItem(name);
 		return;
@@ -74,6 +77,6 @@ function tidy (name, text) {
 	localStorage.setItem(name, newtext);
 }
 function empty () {
-	tidy("", "");
+	tidy("inputlist", "");
 	tidy("outputlist", "");
 }
