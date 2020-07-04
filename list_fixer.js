@@ -7,11 +7,11 @@ var buttonclicked = false;
 function startUp () {
 	// Declaring variables.
 	var theme = "",
-	    output = "",
+	    outputlist = "",
 	
 	// Assigning stored variables
 	theme = localStorage.getItem("theme");
-	output = localStorage.getItem("outputlist");
+	outputlist = localStorage.getItem("outputlist");
 	
 	// Setting stored defaults.
 	
@@ -19,8 +19,8 @@ function startUp () {
 		document.getElementById("themechange").value = theme;
 		changeTheme(theme);
 	}
-	if (output !== null) {
-		tidy("output", output);
+	if (outputlist !== null) {
+		tidy("outputlist", outputlist);
 	}
 }
 function changeTheme(selected) {
@@ -63,6 +63,16 @@ function changeTheme(selected) {
 		// saving theme for retrieval
 		localStorage.setItem("theme", selected);
 }
+function tidy (name, text) {
+	newtext = "";
+	newtext = text;
+	if (text === "") {
+		localStorage.removeItem(name);
+		return;
+	}
+	// saving size for inputs and outputs
+	localStorage.setItem(name, newtext);
+}
 function empty () {
-	tidy("output", "");
+	tidy("outputlist", "");
 }
