@@ -21,6 +21,9 @@ function startUp () {
 		document.getElementById("themechange").value = theme;
 		changeTheme(theme);
 	}
+	if (inputlist !== null) {
+		tidy("inputlist", inputlist);
+	}
 	if (outputlist !== null) {
 		tidy("outputlist", outputlist);
 	}
